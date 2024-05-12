@@ -1,3 +1,8 @@
+<?php
+require_once 'functions/helpers.php';
+require_once 'functions/check-login.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
