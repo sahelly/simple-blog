@@ -31,17 +31,17 @@ if(
             }
             else
             {
-                $error = 'ایمیل وارد شده تکراری میباشد';
+                $error = 'email address has been used before';
             }
         }
         else
         {
-            $error = 'کلمه ی عبور باید حداقل ۵ کاراکتر باشد';
+            $error = 'password should have at least 5 characters';
         }
     }
     else
     {
-        $error = 'کلمه ی عبور با تاییدیه کلمه ی عبور مطابقت ندارد';
+        $error = 'password and password confirmation mismatch';
     }
 }
 else

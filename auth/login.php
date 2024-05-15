@@ -28,18 +28,18 @@ if(
         }
         else
         {
-            $error = 'رمز عبور اشتباه است';
+            $error = 'wrong password';
         }
     }
     else
     {
-        $error = 'ایمیل وارد شده اشتباه میباشد';
+        $error = 'wrong email';
     }
 }
 else
 {
     if(!empty($_POST))
-        $error = 'همه فیلد ها اجباری هستند';
+        $error = 'all fields are necessary';
 }
 
 ?>
