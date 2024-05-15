@@ -46,11 +46,12 @@ require_once '../../functions/check-login.php';
                         <tbody>
                         <?php
                         global $pdo;
-                        $query = "SELECT * FROM posts LEFT JOIN categories ON posts.cat_id = categories.id";
+                        $query = "SELECT posts.*, categories.name AS category_name FROM posts LEFT JOIN categories ON posts.cat_id = categories.id";
                         $statement = $pdo->prepare($query);
                         $statement->execute();
                         $posts = $statement->fetchAll();
                         foreach ($posts as $post) {
+
                             ?>
                             <tr>
                                 <td><?= $post->id ?></td>
@@ -58,7 +59,7 @@ require_once '../../functions/check-login.php';
                                     <img style="width: 90px;" src="<?= asset($post->image) ?>">
                                 </td>
                                 <td><?= $post->title ?></td>
-                                <td><?= $post->name ?></td>
+                                <td><?= $post->category_name ?></td>
                                 <td><?= substr($post->body, 0 ,30) . ' ...'  ?></td>
                                 <td>
                                     <?php if($post->status == 10) { ?>
@@ -68,6 +69,7 @@ require_once '../../functions/check-login.php';
                                     <?php } ?>
                                 </td>
                                 <td>
+
                                     <a href="<?= url('admin/posts/change-status.php?post_id=' . $post->id) ?>" class="btn btn-warning btn-sm">Change status</a>
                                     <a href="<?= url('admin/posts/edit.php?post_id=' . $post->id) ?>" class="btn btn-info btn-sm">Edit</a>
                                     <a href="<?= url('admin/posts/delete.php?post_id=' . $post->id) ?>" class="btn btn-danger btn-sm">Delete</a>
