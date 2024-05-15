@@ -24,7 +24,7 @@ if(
         if(password_verify($_POST['password'], $user->password))
         {
             $_SESSION['user'] = $user->email;
-            redirect('panel');
+            redirect('admin');
         }
         else
         {
