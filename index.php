@@ -1,6 +1,9 @@
 <?php
 require_once 'functions/helpers.php';
 require_once 'functions/check-login.php';
+require_once 'functions/pdo_connection.php';
+
+
 
 ?>
 <!DOCTYPE html>
@@ -55,18 +58,28 @@ require_once 'functions/check-login.php';
             <h2><span>All posts</span></h2>
         </div>
         <div class="card-columns listrecent">
+            <?php
+            global $pdo;
+            $query = "SELECT * FROM posts WHERE status = 10;";
+            $statement = $pdo->prepare($query);
+            $statement->execute();
+            $posts = $statement->fetchAll();
+            ?>
 
+            <?php foreach ($posts as $post): ?>
             <!-- begin post -->
             <div class="card">
                 <a href="post.html">
-                    <img class="img-fluid" src="assets/img/demopic/5.jpg" alt="">
+                    <img class="img-fluid" src="<?= asset($post->image) ?>" alt="">
                 </a>
                 <div class="card-block">
-                    <h2 class="card-title"><a href="post.html">Autumn doesn't have to be nostalgic, you know?</a></h2>
-                    <h4 class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</h4>
+                    <h2 class="card-title"><a href="<?= url('detail.php?post_id=' . $post->id) ?>"><?= $post->title?></a></h2>
+                    <h4 class="card-text"><?=  substr($post->body, 0, 30) ?> ...</h4>
+                    <p><a class="btn btn-primary" href="<?= url('detail.php?post_id=' . $post->id) ?>" role="button">View details »</a></p>
                 </div>
             </div>
             <!-- end post -->
+            <?php endforeach; ?>
 
         </div>
     </section>
